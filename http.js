@@ -17,9 +17,9 @@ http.createServer((req, res) => {
 
   if (['GET', 'POST'].indexOf(req.method) > -1) {
     console.log(decodeURIComponent(req.url))
-    let body = []
-    req.on('data', data => body.push(data))
-      .on('end', () => console.log(Buffer.concat(body).toString()))
+    let body = ''
+    req.on('data', data => body += data)
+      .on('end', () => console.log(body))
     res.writeHead(200, headers)
     res.end('Hello World')
     return
